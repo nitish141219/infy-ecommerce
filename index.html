@@ -156,3 +156,26 @@
     </script>
 </body>
 </html>
+
+<div id="login-section">
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p id="login-status"></p>
+</div>
+<script>
+    async function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+        });
+        if (response.ok) {
+            document.getElementById('login-status').textContent = 'Login successful!';
+        } else {
+            document.getElementById('login-status').textContent = 'Invalid credentials';
+        }
+    }
+</script>
